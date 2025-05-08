@@ -14,8 +14,17 @@ const handler = NextAuth({
     }),
     // Google:
     GoogleProvider({
-      clientId: process.env.GOOGLE_CLIENT_ID,
-      clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+      clientId: process.env.GOOGLE_ID,
+      clientSecret: process.env.GOOGLE_SECRET,
+      async profile(profile) {
+        console.log('📸 Google profile response:', profile);
+        return {
+          id: profile.sub,
+          name: profile.name,
+          email: profile.email,
+          image: profile.picture, // <- this ensures the image is pulled
+        };
+      },
     }),
     // Facebook:
   ],

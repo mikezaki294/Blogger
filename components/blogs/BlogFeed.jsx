@@ -38,7 +38,7 @@ export default function BlogFeed({ refreshBlogs }) {
           const unique = Array.from(new Map(data.blogs.map(b => [b._id, b])).values());
           setBlogs(unique);
           setPage(2); // ready to fetch page 2 on scroll
-          setHasMore(data.blogs.length === 6); // set false if fewer than 6
+          setHasMore(data.blogs.length === 3); // set false if fewer than 6
         }
       } catch (err) {
         console.error('Failed to fetch blogs:', err);

@@ -55,7 +55,7 @@ export default function BlogContent({ initialData }) {
 
 
 
-  if (!blog) {
+  if (!blog && !loading) {
     return (
       <Container sx={{ py: 10 }}>
         <Typography variant="h4">Blog Not Found</Typography>

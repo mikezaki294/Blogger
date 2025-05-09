@@ -8,8 +8,8 @@ import BeachAccessIcon from '@mui/icons-material/BeachAccess';
 import DarkModeIcon from '@mui/icons-material/DarkMode';
 
 const themeOptions = [
-  { name: 'dark', icon: <DarkModeIcon />, label: 'Dark Mode' },
-  { name: 'beach', icon: <BeachAccessIcon />, label: 'Beach Theme' },
+  { name: 'dark', icon: <DarkModeIcon />, label: 'Midnight' },
+  { name: 'beach', icon: <BeachAccessIcon />, label: 'Beach' },
   // Add more themes here later
 ];
 

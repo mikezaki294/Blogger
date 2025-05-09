@@ -134,11 +134,11 @@ const beachTheme = createTheme({
         {
           props: { variant: 'modal' },
           style: {
-            backgroundColor: '#ffb74d',
+            backgroundColor: '#00bcd4',
             color: '#fff',
             boxShadow: '0 4px 12px rgba(0,0,0,0.15)',
             '&:hover': {
-              backgroundColor: '#ffa726',
+              backgroundColor: '#0097a7',
               boxShadow: '0 6px 16px rgba(0,0,0,0.2)',
             },
           },

@@ -1,10 +1,13 @@
 'use client';
-
-import { Box, Button } from '@mui/material';
-// Footer with a cancel button
+// Footer with submission and snackbar for user alert
 // Flagged for refactor
 
-export default function Footer({ handleClose }) {
+import { Box } from '@mui/material';
+import SubmitBlogButton from './SubmitBlogButton';
+import SubmitSnackbar from './SubmitSnackbar';
+
+
+export default function Footer({ isFormComplete, handleSubmit, successOpen, setSuccessOpen }) {
   return (
     <Box
       sx={(theme) => ({
@@ -21,13 +24,8 @@ export default function Footer({ handleClose }) {
         backdropFilter: 'blur(2px)',
       })}
     >
-      <Button
-        variant="modal"
-        onClick={handleClose}
-        sx={{ fontSize: '0.875rem' }}
-      >
-        Cancel
-      </Button>
+      <SubmitBlogButton disabled={!isFormComplete} onClick={handleSubmit} />
+      <SubmitSnackbar open={successOpen} onClose={() => setSuccessOpen(false)} />
     </Box>
   );
 }

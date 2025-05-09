@@ -3,7 +3,7 @@ export const introWrapper = (theme) => ({
   display: 'flex',
   justifyContent: 'center',
   px: { xs: 2, sm: 4 },
-  py: { xs: 3, sm: 5, md: 6, lg: 8, xl: 10 },
+  py: { xs: 3, sm: 5, md: 6, lg: 6, xl: 6 },
   backgroundColor: theme.palette.background.intro,
   borderBottom: `1px solid ${theme.palette.divider}`,
   boxShadow: theme.shadows[1],

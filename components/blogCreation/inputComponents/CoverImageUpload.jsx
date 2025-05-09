@@ -30,7 +30,7 @@ export default function CoverImageUpload({ onUpload }) {
     setUploading(true);
     setError('');
 
-    /*try {
+    try {
       const formData = new FormData();
       formData.append('file', file);
 
@@ -48,18 +48,9 @@ export default function CoverImageUpload({ onUpload }) {
       setError(err.message);
     } finally {
       setUploading(false);
-    }*/
-
-    try {
-      await new Promise((res) => setTimeout(res, 500)); // Simulate delay
-      const randomUrl = `https://picsum.photos/seed/${Date.now()}/800/600`;
-      setImageUrl(randomUrl);
-      onUpload(randomUrl);
-    } catch (err) {
-      setError('Simulated upload failed');
-    } finally {
-      setUploading(false);
     }
+
+
   };
 
   const handleDrop = (e) => {

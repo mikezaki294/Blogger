@@ -20,7 +20,7 @@ export function ThemeProvider({ children }) {
 
   useEffect(() => {
     const stored = localStorage.getItem('theme');
-    const initial = stored && themeKeys.includes(stored) ? stored : 'dark';
+    const initial = stored && themeKeys.includes(stored) ? stored : 'beach';
     setThemeName(initial);
     setHasMounted(true);
   }, []);
@@ -37,7 +37,7 @@ export function ThemeProvider({ children }) {
     });
   };
 
-  const theme = useMemo(() => themeOptions[themeName] || darkTheme, [themeName]);
+  const theme = useMemo(() => themeOptions[themeName] || beachTheme, [themeName]);
 
   if (!hasMounted || !themeName) return null; // ⏳ wait for theme to load
 

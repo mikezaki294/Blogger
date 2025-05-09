@@ -1,13 +1,12 @@
 'use client';
-// Header with submit button and modal title
-// Snackbar alerts the user on successful upload
+// Header with cancel and modal title
 
-import { Box, Typography } from '@mui/material';
+import { Box, Typography, AppBar, Button } from '@mui/material';
 import { layoutStyles } from '@/styles/customStyles';
 import SubmitBlogButton from './SubmitBlogButton';
 import SubmitSnackbar from './SubmitSnackbar';
 
-export default function Header({ isFormComplete, handleSubmit, successOpen, setSuccessOpen }) {
+export default function Header({ handleClose }) {
   return (
     <Box
       sx={(theme) => ({ ...layoutStyles.headerBox,
@@ -27,8 +26,13 @@ export default function Header({ isFormComplete, handleSubmit, successOpen, setS
         Create a New Blog
       </Typography>
 
-      <SubmitBlogButton disabled={!isFormComplete} onClick={handleSubmit} />
-      <SubmitSnackbar open={successOpen} onClose={() => setSuccessOpen(false)} />
+      <Button
+        variant="modal"
+        onClick={handleClose}
+        sx={{ fontSize: '0.875rem' }}
+      >
+        Cancel
+      </Button>
     </Box>
   );
 }

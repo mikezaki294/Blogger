@@ -17,7 +17,7 @@ const handler = NextAuth({
       clientId: process.env.GOOGLE_ID,
       clientSecret: process.env.GOOGLE_SECRET,
       async profile(profile) {
-        console.log('📸 Google profile response:', profile);
+
         return {
           id: profile.sub,
           name: profile.name,

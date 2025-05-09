@@ -25,17 +25,13 @@ export default function CreateBlog({ handleClose, triggerRefresh }) {
 
 // Submitting
 const handleSubmit = async () => {
-  // Clean body content to remove excessive blank lines
-  const cleanedBody = body
-    // .replace(/(<p><br><\/p>){2,}/g, '<p><br></p>') // Collapse multiple breaks into one
-    // .replace(/(<p><br><\/p>\s*)+$/g, '');           // Remove trailing breaks
-
+  // Parse blogdata, make any needed adjustments, then post to DB
 
   const blogData = {
     authorUsername: session?.user?.name || 'Anonymous',
     authorAvatar: session?.user?.image || 'https://ui-avatars.com/api/?name=A&background=aaa&color=fff&bold=true',
     title,
-    body: cleanedBody,
+    body: body,
     tags,
     coverImageUrl: coverImage,
   };
@@ -61,12 +57,14 @@ const handleSubmit = async () => {
   }
 };
 
+  // Ensure all required fields are obtained from user
   const isFormComplete = title && coverImage && body && tags.length > 0;
 
   return (
     <Box sx={{ display: 'flex', flexDirection: 'column', height: '75dvh'}} >
       {/* Pinned Header */}
       <Header
+        handleClose={handleClose}
         isFormComplete={isFormComplete}
         handleSubmit={handleSubmit}
         successOpen={successOpen}
@@ -106,7 +104,10 @@ const handleSubmit = async () => {
       </Box>
 
 
-      <Footer handleClose={handleClose} />
+      <Footer isFormComplete={isFormComplete}
+        handleSubmit={handleSubmit}
+        successOpen={successOpen}
+        setSuccessOpen={setSuccessOpen} />
     </Box>
   );
 }

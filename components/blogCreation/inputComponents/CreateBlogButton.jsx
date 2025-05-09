@@ -21,7 +21,7 @@ export default function CreateBlogButton({ triggerRefresh }) {
       <Button
         variant="expandable"
         onClick={handleOpen}
-        disabled={!isLoggedIn}
+        // disabled={!isLoggedIn}
         onMouseEnter={() => setHovered(true)}
         onMouseLeave={() => setHovered(false)}
         sx={{
@@ -43,18 +43,22 @@ export default function CreateBlogButton({ triggerRefresh }) {
               fontSize: '0.9rem',
             }}
           >
-            {isLoggedIn ? 'Create New Blog' : 'Sign in to create a blog!'}
+            Create a new blog!
           </Box>
         )}
       </Button>
-
-      {isLoggedIn && (
         <BlogModal
           open={open}
           handleClose={handleClose}
           triggerRefresh={triggerRefresh}
         />
-      )}
+      {/* {isLoggedIn && (
+        <BlogModal
+          open={open}
+          handleClose={handleClose}
+          triggerRefresh={triggerRefresh}
+        />
+      )} */}
     </>
   );
 }

@@ -30,9 +30,10 @@ const handleSubmit = async () => {
     // .replace(/(<p><br><\/p>){2,}/g, '<p><br></p>') // Collapse multiple breaks into one
     // .replace(/(<p><br><\/p>\s*)+$/g, '');           // Remove trailing breaks
 
+
   const blogData = {
-    authorUsername: session.user.name || session.user.email,
-    authorAvatar: session.user.image || '',
+    authorUsername: session?.user?.name || 'Anonymous',
+    authorAvatar: session?.user?.image || 'https://ui-avatars.com/api/?name=A&background=aaa&color=fff&bold=true',
     title,
     body: cleanedBody,
     tags,

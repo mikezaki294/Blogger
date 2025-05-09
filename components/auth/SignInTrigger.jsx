@@ -42,7 +42,7 @@ export default function SignInTrigger() {
           sx={{ width: 34, height: 34, borderRadius: 2 }}
         />
         <Typography
-          sx={{  color: 'text.tertiary', fontWeight: 600,  }}
+          sx={{  color: 'text.tertiary', fontWeight: 600, display: { xs: 'none', md: 'block' }, }}
         >
           {session.user.name}
         </Typography>
@@ -64,9 +64,17 @@ export default function SignInTrigger() {
   //*** Not signed in */
   return (
     <>
-      <Button variant='modal' sx={{fontSize: '1rem'}} onClick={() => setOpen(true)}>
-        Log In
-      </Button>
+    <Button
+  variant="modal"
+  onClick={() => setOpen(true)}
+  sx={{
+    fontSize: { xs: '0.8rem', sm: '1rem' },
+    padding: { xs: '4px 12px', sm: '8px 24px' },
+    minHeight: { xs: 36, sm: 40 },
+  }}
+>
+  Log In
+</Button>
 
       <Dialog open={open} onClose={() => setOpen(false)}>
         <DialogTitle

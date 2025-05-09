@@ -8,6 +8,7 @@ const beachTheme = createTheme({
     background: {
       default: '#f2e5c7', // softened sand tone
       paper: '#fcf6e3',   // warm paper
+      intro: '#fff4dc',
     },
     text: {
       primary: '#4e4e4e',

@@ -59,7 +59,7 @@ export default function BlogFeed({ refreshBlogs }) {
         if (entries[0].isIntersecting && hasMore && !loading) {
           setLoading(true);
           try {
-            const res = await fetch(`/api/blogs?page=${page}&limit=6`);
+            const res = await fetch(`/api/blogs?page=${page}&limit=3`);
             const data = await res.json();
 
             setBlogs(prev => {

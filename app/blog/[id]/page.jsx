@@ -10,7 +10,7 @@ import BlogContentWrapper from '@/components/blogs/blogComponents/blogContentWra
 import { connectToDB } from '@/utils/database';
 import Blog from '@/models/blog';
 import { Box, Container, Divider } from '@mui/material';
-import { fullImageWrapper } from '../../../styles/imageStyles';
+// import { fullImageWrapper } from '../../../styles/imageStyles';
 import { fullHeaderWrapper, fullMetaRow } from '../../../styles/fullBlogStyles';
 
 export const dynamic = 'force-dynamic';
@@ -50,9 +50,9 @@ export default async function BlogDetailPage(props) {
             <BlogAuthor avatar={blog.authorAvatar} username={blog.authorUsername} variant="full" />
             <BlogDate date={blog.createdAt} />
           </Box>
-          <Box sx={fullImageWrapper}>
-          <BlogImage imageUrl={blog.coverImageUrl} full />
-        </Box>
+          {/* <Box sx={fullImageWrapper}> */}
+            <BlogImage imageUrl={blog.coverImageUrl} full />
+          {/* </Box> */}
         </Box>
 
         <Divider variant="full" />

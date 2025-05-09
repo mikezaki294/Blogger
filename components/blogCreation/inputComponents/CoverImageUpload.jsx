@@ -31,14 +31,51 @@ export default function CoverImageUpload({ onUpload }) {
     setError('');
 
     try {
-      const formData = new FormData();
-      formData.append('file', file);
+      // const formData = new FormData();
+      // formData.append('file', file);
 
-      const res = await fetch('/api/upload', {
-        method: 'POST',
-        body: formData,
-      });
+      // const res = await fetch('/api/upload', {
+      //   method: 'POST',
+      //   body: formData,
+      // });
 
+      const resizeImage = (file, maxWidth = 800) =>
+        new Promise((resolve, reject) => {
+          const reader = new FileReader();
+          reader.onload = (event) => {
+            const img = new Image();
+            img.onload = () => {
+              const scale = maxWidth / img.width;
+              const width = img.width > maxWidth ? maxWidth : img.width;
+              const height = img.width > maxWidth ? img.height * scale : img.height;
+
+              const canvas = document.createElement('canvas');
+              canvas.width = width;
+              canvas.height = height;
+              const ctx = canvas.getContext('2d');
+              ctx.drawImage(img, 0, 0, width, height);
+
+              canvas.toBlob((blob) => {
+                if (!blob) return reject(new Error('Canvas is empty'));
+                const resizedFile = new File([blob], file.name, { type: file.type });
+                resolve(resizedFile);
+              }, file.type);
+            };
+            img.onerror = reject;
+            img.src = event.target.result;
+          };
+          reader.onerror = reject;
+          reader.readAsDataURL(file);
+        });
+
+        const resizedFile = await resizeImage(file);
+        const formData = new FormData();
+        formData.append('file', resizedFile);
+
+        const res = await fetch('/api/upload', {
+          method: 'POST',
+          body: formData,
+        });
       const data = await res.json();
       if (!res.ok) throw new Error(data.error || 'Upload failed');
 

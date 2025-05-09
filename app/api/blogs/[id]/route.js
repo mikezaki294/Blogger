@@ -3,14 +3,21 @@ import { connectToDB } from '@/utils/database';
 import Blog from '@/models/blog';
 import { NextResponse } from 'next/server';
 
-export async function GET(req, { params }) {
+export const dynamic = 'force-dynamic';
+
+export async function GET(req,  context ) {
+  const params = await context.params
+   console.log('params:', params);
   try {
     await connectToDB();
+
     const blog = await Blog.findById(params.id);
 
     if (!blog) {
       return NextResponse.json({ error: 'Blog not found' }, { status: 404 });
     }
+
+    blog._id = blog._id.toString();
 
     return NextResponse.json(blog, { status: 200 });
   } catch (err) {

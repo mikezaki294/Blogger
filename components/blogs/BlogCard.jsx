@@ -22,18 +22,29 @@ export default function BlogCard({ blog }) {
         '&:hover': cardHover(theme),
       }}
     >
-      <Box sx={{ position: 'relative' }}>
-        <BlogImage imageUrl={blog.coverImageUrl} card />
-        {/* <BlogLikes blogId={blog._id} initialLikedBy={blog.likedBy} /> */} {/*Will do likes later*/ }
-      </Box>
+      <Link
+        href={{
+          pathname: `/blog/${blog._id}`,
+          query: {
+            title: blog.title,
+            coverImageUrl: blog.coverImageUrl,
+            authorUsername: blog.authorUsername,
+            authorAvatar: blog.authorAvatar,
+            createdAt: blog.createdAt, },
+        }}
+        prefetch={false}
+        style={{ textDecoration: 'none', color: 'inherit' }}
+      >
+        <Box sx={{ position: 'relative' }}>
+          <BlogImage imageUrl={blog.coverImageUrl} card />
+          {/* <BlogLikes blogId={blog._id} initialLikedBy={blog.likedBy} /> */} {/*Will do likes later*/ }
+        </Box>
 
-      <Box sx={cardHeader(theme)}>
-        <BlogAuthor avatar={blog.authorAvatar} username={blog.authorUsername} />
-        <BlogDate date={blog.createdAt} />
-      </Box>
+        <Box sx={cardHeader(theme)}>
+          <BlogAuthor avatar={blog.authorAvatar} username={blog.authorUsername} />
+          <BlogDate date={blog.createdAt} />
+        </Box>
 
-
-      <Link href={`/blog/${blog._id}`} style={{ textDecoration: 'none', color: 'inherit' }}>
         <Box>
           <BlogTitle title={blog.title} />
           <BlogSummary summary={blog.summary} />

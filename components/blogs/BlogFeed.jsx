@@ -31,7 +31,7 @@ export default function BlogFeed({ refreshBlogs }) {
     const fetchInitialBlogs = async () => {
       setLoading(true);
       try {
-        const res = await fetch(`/api/blogs?page=1&limit=6`);
+        const res = await fetch(`/api/blogs?page=1&limit=3`);
         const data = await res.json();
 
         if (!didCancel) {

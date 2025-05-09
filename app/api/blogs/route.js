@@ -18,7 +18,8 @@ export async function GET(req) {
       .skip(skip)
       .limit(limit);
 
-    const hasMore = (page * limit) < totalBlogs;
+    // const hasMore = (page * limit) < totalBlogs;
+    const hasMore = skip + blogs.length < totalBlogs;
 
     return NextResponse.json({ blogs, hasMore });
   } catch (err) {

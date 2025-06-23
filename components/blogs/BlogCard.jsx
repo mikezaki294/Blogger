@@ -12,7 +12,7 @@ import BlogSummary from './blogComponents/blogSummary';
 import BlogTags from './blogComponents/blogTags';
 import { cardContainer, cardHeader, cardHover } from '@/styles/blogCardStyles';
 
-export default function BlogCard({ blog }) {
+export default function BlogCard({ blog, onTagClick }) {
   const theme = useTheme();
 
   return (
@@ -51,7 +51,7 @@ export default function BlogCard({ blog }) {
         </Box>
       </Link>
 
-      <BlogTags tags={blog.tags} />
+      <BlogTags tags={blog.tags} onTagClick={onTagClick} />
     </Card>
   );
 }

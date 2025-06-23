@@ -15,10 +15,13 @@ import {
 } from '@mui/material';
 
 import BlogCard from './BlogCard';
+import BlogFilter from './BlogFilter'
 import { motion } from 'framer-motion';
 
 export default function BlogFeed({ refreshBlogs }) {
   const [blogs, setBlogs] = useState([]);
+  const [filters, setFilters] = useState([]);
+  const [searchQuery, setSearchQuery] = useState('');
   const [page, setPage] = useState(1);
   const [hasMore, setHasMore] = useState(true);
   const [loading, setLoading] = useState(false);
@@ -84,8 +87,26 @@ export default function BlogFeed({ refreshBlogs }) {
     return () => observer.disconnect();
   }, [page, hasMore, loading]);
 
+  // Filter function
+  const filteredBlogs = blogs.filter((blog) => {
+    const lowerTitle = blog.title.toLowerCase();
+    const lowerTags = blog.tags?.map((tag) => tag.toLowerCase()) || [];
+
+    return filters.every((filter) => {
+      const f = filter.toLowerCase();
+      return lowerTitle.includes(f) || lowerTags.includes(f);
+    });
+  });
+
   return (
     <Box sx={{ px: 2, py: 4, maxWidth: '90vw', mx: 'auto' }}>
+      {/* Filter component */}
+      <BlogFilter
+        searchQuery={searchQuery}
+        setSearchQuery={setSearchQuery}
+        filters={filters}
+        setFilters={setFilters}
+      />
       <Box
         sx={{
           display: 'flex',
@@ -94,7 +115,7 @@ export default function BlogFeed({ refreshBlogs }) {
           gap: 6, // 32px gap between cards
         }}
       >
-        {blogs.map((blog) => (
+        {filteredBlogs.map((blog) => (
           <Box
             key={blog._id}
             sx={{
@@ -104,9 +125,17 @@ export default function BlogFeed({ refreshBlogs }) {
               minWidth: '400px',
             }}
           >
-            <BlogCard blog={blog} />
+            {/* <BlogCard blog={blog} /> */}
+            <BlogCard blog={blog} onTagClick={(tag) => {
+              if (!filters.includes(tag)) setFilters([...filters, tag]);
+            }} />
           </Box>
         ))}
+        {filteredBlogs.length === 0 && !loading && (
+          <Typography variant="body1" sx={{ mt: 4, color: '#ccc', textAlign: 'center' }}>
+            No blogs match your current filters.
+          </Typography>
+        )}
       </Box>
 
       {loading && (
